@@ -25,24 +25,32 @@ export class AddWorkerPage {
   DateOfBirth:string="";
   TownsList:any=[];
   HandCraftsList:any=[];
+  WorkersList:any=[];
+
   constructor(public navCtrl: NavController,public alertCtrl:AlertController) {
    
-   firebase.database().ref("towns/").on('value',response=>{
+   firebase.database().ref("").on('value',response=>{
      
-      this.TownsList=this.DataToArray(response);
+      this.TownsList=this.DataToArray3(response);
 
    });
-   firebase.database().ref("handcrafts/").on('value',response=>{
+   firebase.database().ref("/").on('value',response=>{
      
-    this.HandCraftsList=this.DataToArray(response);
+    this.HandCraftsList=this.DataToArray3(response);
 
  });
+
+ firebase.database().ref("/").on('value',response=>{
+     
+  this.WorkersList=this.DataToArray3(response);
+
+});
   }
 
 
   onRegisterClick(){
 
-    firebase.database().ref("users").push({
+    firebase.database().ref("").push({
 
       FullName:this.FullName,
       Password:this.Password,
@@ -63,11 +71,26 @@ export class AddWorkerPage {
     });
     alert.present();
   }
+
+
+  DeleteItem(event,worker){
+    //debugger;
+
+    firebase.database().ref("/").child(worker.key).remove();
+
+  }
+
+  EditItem(event,worker){
+
+  // debugger;
+    //firebase.database().ref("/").child(town.key).remove();
+
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddWorkerPage');
   }
 
-  DataToArray(AllData) {
+  DataToArray3(AllData) {
     let returnArr = [];
 
     AllData.forEach(childData => {

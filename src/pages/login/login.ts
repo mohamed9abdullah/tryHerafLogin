@@ -24,7 +24,7 @@ export class LoginPage {
   }
   onLoginClick(){
 
-    if(this.FullName=="Mostafa" && this.Password=="123")
+    if(this.FullName=="Ahmed" && this.Password=="123")
     this.navCtrl.push(TabsPage);
  
  else{

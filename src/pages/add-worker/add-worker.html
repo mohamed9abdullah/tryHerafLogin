@@ -23,7 +23,7 @@
     </ion-item>
 
     <ion-item>
-      <ion-label><ion-icon ios="ios-call" md="md-call"></ion-icon>></ion-label>
+      <ion-label><ion-icon ios="ios-call" md="md-call"></ion-icon></ion-label>
       <ion-input type="number"  [(ngModel)]="Phone"></ion-input>
      </ion-item>
 
@@ -63,5 +63,30 @@
       
   </ion-list>
    
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let worker of WorkersList">
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="{{worker?.ImgURL}}">
+        </ion-avatar>
+        <h2>{{worker?.FullName}}</h2>
+      </ion-item>
+      <ion-item-options side="right">
+      
+
+        <button ion-button color="primary" (click)="EditItem($event,worker)" >
+          <ion-icon ios="ios-create" md="md-create"></ion-icon>
+        </button>
+        
+        <button ion-button color="danger" (click)="DeleteItem($event,worker)">
+          <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+
+        </button>
+        
+      </ion-item-options>
+    
+    </ion-item-sliding>
+  </ion-list>
 
 </ion-content>

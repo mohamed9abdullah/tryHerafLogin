@@ -16,16 +16,25 @@ import * as firebase from 'Firebase';
 })
 export class AddTownPage {
 FullName:string="";
+ImgURL:string="";
+
+TownsList:any=[];
 
 constructor(public navCtrl: NavController,public alertCtrl:AlertController) {
+    
+  firebase.database().ref("/").on('value',response=>{
+     
+    this.TownsList=this.DataToArray1(response);
 
+ });
 }
 
 onRegisterClick(){
 
-  firebase.database().ref("towns/").push({
+  firebase.database().ref("/").push({
 
-    FullName:this.FullName
+    FullName:this.FullName,
+    ImgURL:this.ImgURL
   });
  
 
@@ -39,8 +48,40 @@ onRegisterClick(){
   alert.present();
 }
 
+DeleteItem(event,town){
+  debugger;
+
+  firebase.database().ref("/").child(town.key).remove();
+
+}
+
+EditItem(event,town){
+
+  debugger;
+  //firebase.database().ref("/").child(town.key).remove();
+
+}
+DataToArray1(AllData) {
+  let returnArr = [];
+
+  AllData.forEach(childData => {
+      let item = childData.val();
+      item.key = childData.key;
+      returnArr.push(item);
+  });
+
+  return returnArr;
+}
+
 ionViewDidLoad() {
   console.log('ionViewDidLoad AddTownPage');
 }
 
 }
+
+
+
+  
+
+
+  
