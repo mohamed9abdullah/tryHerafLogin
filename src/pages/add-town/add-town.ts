@@ -22,7 +22,7 @@ TownsList:any=[];
 
 constructor(public navCtrl: NavController,public alertCtrl:AlertController) {
     
-  firebase.database().ref("/").on('value',response=>{
+  firebase.database().ref("towns/").on('value',response=>{
      
     this.TownsList=this.DataToArray1(response);
 
@@ -31,7 +31,7 @@ constructor(public navCtrl: NavController,public alertCtrl:AlertController) {
 
 onRegisterClick(){
 
-  firebase.database().ref("/").push({
+  firebase.database().ref("towns/").push({
 
     FullName:this.FullName,
     ImgURL:this.ImgURL
@@ -51,14 +51,14 @@ onRegisterClick(){
 DeleteItem(event,town){
   debugger;
 
-  firebase.database().ref("/").child(town.key).remove();
+  firebase.database().ref("towns/").child(town.key).remove();
 
 }
 
 EditItem(event,town){
 
   debugger;
-  //firebase.database().ref("/").child(town.key).remove();
+  //firebase.database().ref("towns/").child(town.key).remove();
 
 }
 DataToArray1(AllData) {

@@ -22,7 +22,7 @@ export class AddHerfaPage {
 
 constructor(public navCtrl: NavController,public alertCtrl:AlertController) {
 
-  firebase.database().ref("/").on('value',response=>{
+  firebase.database().ref("handcrafts/").on('value',response=>{
      
     this.HandCraftsList=this.DataToArray2(response);
 
@@ -31,7 +31,7 @@ constructor(public navCtrl: NavController,public alertCtrl:AlertController) {
 
   onRegisterClick(){
 
-    firebase.database().ref("/").push({
+    firebase.database().ref("handcrafts/").push({
 
       FullName:this.FullName,
       ImgURL:this.ImgURL
@@ -52,14 +52,14 @@ constructor(public navCtrl: NavController,public alertCtrl:AlertController) {
   DeleteItem(event,herfa){
     //debugger;
 
-    firebase.database().ref("/").child(herfa.key).remove();
+    firebase.database().ref("handcrafts/").child(herfa.key).remove();
 
   }
 
   EditItem(event,herfa){
 
   // debugger;
-    //firebase.database().ref("/").child(town.key).remove();
+    //firebase.database().ref("handcrafts/").child(town.key).remove();
 
   }
   ionViewDidLoad() {

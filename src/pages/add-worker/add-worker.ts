@@ -29,18 +29,18 @@ export class AddWorkerPage {
 
   constructor(public navCtrl: NavController,public alertCtrl:AlertController) {
    
-   firebase.database().ref("").on('value',response=>{
+   firebase.database().ref("towns/").on('value',response=>{
      
       this.TownsList=this.DataToArray3(response);
 
    });
-   firebase.database().ref("/").on('value',response=>{
+   firebase.database().ref("handcrafts/").on('value',response=>{
      
     this.HandCraftsList=this.DataToArray3(response);
 
  });
 
- firebase.database().ref("/").on('value',response=>{
+ firebase.database().ref("users/").on('value',response=>{
      
   this.WorkersList=this.DataToArray3(response);
 
@@ -50,7 +50,7 @@ export class AddWorkerPage {
 
   onRegisterClick(){
 
-    firebase.database().ref("").push({
+    firebase.database().ref("users").push({
 
       FullName:this.FullName,
       Password:this.Password,
@@ -76,14 +76,14 @@ export class AddWorkerPage {
   DeleteItem(event,worker){
     //debugger;
 
-    firebase.database().ref("/").child(worker.key).remove();
+    firebase.database().ref("users/").child(worker.key).remove();
 
   }
 
   EditItem(event,worker){
 
   // debugger;
-    //firebase.database().ref("/").child(town.key).remove();
+    //firebase.database().ref("handcrafts/").child(town.key).remove();
 
   }
   ionViewDidLoad() {
